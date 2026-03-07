@@ -28,7 +28,6 @@ import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
-import { useCreateMessage } from "@/hooks/use-messages";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { api } from "@shared/routes";
@@ -42,8 +41,6 @@ import type { z } from "zod";
 const formSchema = api.messages.create.input;
 
 export default function Home() {
-  const { mutate: createMessage, isPending } = useCreateMessage();
-
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
     defaultValues: {
@@ -55,11 +52,24 @@ export default function Home() {
   });
 
   function onSubmit(values: z.infer<typeof formSchema>) {
-    createMessage(values, {
-      onSuccess: () => {
-        form.reset();
-      }
-    });
+    // Construct WhatsApp message with form data
+    const whatsappMessage = `Hi Vaibhav!
+
+Name: ${values.name}
+Email: ${values.email}
+Service Required: ${values.serviceType}
+
+Message:
+${values.message}`;
+
+    // Encode message for URL
+    const encodedMessage = encodeURIComponent(whatsappMessage);
+    
+    // Redirect to WhatsApp
+    window.open(`https://wa.me/919922565938?text=${encodedMessage}`, '_blank');
+    
+    // Reset form
+    form.reset();
   }
 
   const fadeIn = {
@@ -465,7 +475,7 @@ export default function Home() {
                   Ready to accelerate your tech career? Click below to register directly via my personal WhatsApp and discuss your learning goals.
                 </p>
                 <form
-                  action="https://wa.me/919922565388"
+                  action="https://wa.me/919922565938"
                   method="get"
                   target="_blank"
                   className="flex flex-col gap-4 max-w-sm mx-auto"
@@ -662,8 +672,8 @@ export default function Home() {
                     )}
                   />
 
-                  <Button type="submit" size="lg" className="w-full h-14 text-base" disabled={isPending}>
-                    {isPending ? "Sending..." : "Send Message"}
+                  <Button type="submit" size="lg" className="w-full h-14 text-base gap-2">
+                    <MessageCircle className="w-5 h-5" /> Send via WhatsApp
                   </Button>
                 </form>
               </Form>
