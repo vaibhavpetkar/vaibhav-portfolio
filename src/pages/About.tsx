@@ -1,21 +1,25 @@
+import { useEffect } from "react";
 import { Navbar } from "@/components/Navbar";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { 
-  Github, Linkedin, Mail, Globe, 
+import { Button } from "@/components/ui/button";
+import { motion } from "framer-motion";
+import {
+  Github, Linkedin, Mail, Globe,
   Award, Code2,
-  Building2, GraduationCap
+  Building2, GraduationCap, MessageCircle, Phone, ArrowLeft
 } from "lucide-react";
+import { Link } from "wouter";
 
 const structuredData = {
   "@context": "https://schema.org",
   "@type": "Person",
   "name": "Vaibhav Petkar",
-  "jobTitle": ["Software Developer", "Frappe Developer", "ERPNEXT Developer", "Programming Instructor"],
-  "url": "https://vaibhavpetkar.site",
-  "image": "https://vaibhavpetkar.site/vaibhav-avatar.png", // Update with your photo
-  "email": "mailto:your-email@example.com", // Update with your email
-  "telephone": "+91-your-phone", // Update with your phone
+  "jobTitle": ["Software Developer", "Tech CEO", "Frappe Developer", "ERPNext Developer", "Programming Instructor"],
+  "url": "https://vaibhavpetkar.online",
+  "image": "https://vaibhavpetkar.online/vaibhav-avatar.png",
+  "email": "mailto:vaibhavprakashpetkar@gmail.com",
+  "telephone": "+91-9922565938",
   "address": {
     "@type": "PostalAddress",
     "addressLocality": "Kolhapur",
@@ -23,26 +27,32 @@ const structuredData = {
     "addressCountry": "IN"
   },
   "sameAs": [
-    "https://www.linkedin.com/in/vaibhavpetkar",
-    "https://github.com/vaibhavpetkar"
+    "https://www.linkedin.com/in/vaibhav-petkar-8370b424a",
+    "https://github.com/VaibhavPetkar",
+    "https://github.com/vaibhav10x",
+    "https://vaibhavpetkar.online"
   ],
   "worksFor": {
     "@type": "Organization",
     "name": "V10x Technologies Pvt Ltd"
   },
   "knowsAbout": [
-    "Frappe Framework",
-    "ERPNext",
-    "Python",
-    "JavaScript",
-    "React",
-    "TypeScript",
-    "Web Development",
-    "Full Stack Development"
+    "Frappe Framework", "ERPNext", "Python", "JavaScript",
+    "React", "TypeScript", "Web Development", "Full Stack Development",
+    "Android Development", "Flutter", "Cybersecurity", "Linux"
   ]
 };
 
+const fadeIn = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0, transition: { duration: 0.5 } }
+};
+
 export default function About() {
+  useEffect(() => {
+    document.title = "About Vaibhav Petkar | Tech CEO, Full-Stack Developer & Mentor";
+  }, []);
+
   return (
     <>
       {/* Schema.org Structured Data */}
@@ -50,201 +60,306 @@ export default function About() {
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      
+
       <Navbar />
-      
-      <main className="min-h-screen bg-background">
-        <div className="container mx-auto px-4 py-16">
+
+      <main className="min-h-screen bg-mesh">
+        <div className="blob blob-1"></div>
+        <div className="blob blob-2"></div>
+
+        <div className="max-w-5xl mx-auto px-4 sm:px-6 pt-28 pb-16">
+
+          {/* Back link */}
+          <motion.div initial="hidden" animate="visible" variants={fadeIn} className="mb-8">
+            <Link href="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group">
+              <ArrowLeft className="w-4 h-4 group-hover:-translate-x-1 transition-transform" />
+              Back to Home
+            </Link>
+          </motion.div>
+
           {/* Hero Section */}
-          <div className="max-w-4xl mx-auto mb-16">
-            <div className="grid md:grid-cols-3 gap-8 items-start">
-              {/* Photo */}
-              <div className="md:col-span-1 flex justify-center">
-                <div className="w-48 h-48 rounded-lg overflow-hidden border-4 border-primary shadow-lg">
-                  <img 
-                    src="/vaibhav-avatar.png" 
-                    alt="Vaibhav Petkar"
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-              </div>
+          <motion.div
+            initial="hidden"
+            animate="visible"
+            variants={fadeIn}
+            className="mb-16"
+          >
+            <div className="glass-card rounded-3xl p-8 md:p-12 overflow-hidden relative">
+              <div className="absolute top-0 right-0 w-64 h-64 bg-primary/10 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none" />
+              <div className="absolute bottom-0 left-0 w-48 h-48 bg-violet-500/10 rounded-full blur-3xl -ml-10 -mb-10 pointer-events-none" />
 
-              {/* Bio Section */}
-              <div className="md:col-span-2">
-                <h1 className="text-4xl font-bold mb-2">Vaibhav Petkar</h1>
-                <p className="text-xl text-muted-foreground mb-4">
-                  Software Developer | Frappe & ERPNext Specialist | Programming Instructor
-                </p>
-                
-                <div className="space-y-3 mb-6 text-sm text-muted-foreground">
-                  <p>📍 <strong>Location:</strong> Kolhapur, Maharashtra, India</p>
-                  <p>🏢 <strong>Company:</strong> V10x Technologies Pvt Ltd</p>
-                  <p>📱 <strong>Experience:</strong> Full Stack Development & Frappe/ERPNext Expertise</p>
+              <div className="grid md:grid-cols-3 gap-8 items-center relative z-10">
+                {/* Photo */}
+                <div className="md:col-span-1 flex justify-center">
+                  <motion.div
+                    animate={{ y: [0, -10, 0] }}
+                    transition={{ repeat: Infinity, duration: 5, ease: "easeInOut" }}
+                    className="relative"
+                  >
+                    <div className="w-44 h-44 rounded-2xl overflow-hidden border-4 border-primary/30 shadow-2xl shadow-primary/20">
+                      <img
+                        src="/vaibhav-avatar.png"
+                        alt="Vaibhav Petkar - Tech CEO and Full-Stack Developer"
+                        className="w-full h-full object-cover"
+                      />
+                    </div>
+                    <div className="absolute -bottom-3 left-1/2 -translate-x-1/2 whitespace-nowrap bg-background border border-border px-3 py-1 rounded-full text-xs font-bold text-primary shadow-lg">
+                      Born: 28th July 1999
+                    </div>
+                  </motion.div>
                 </div>
 
-                {/* Social Links */}
-                <div className="flex gap-3 mb-6">
-                  <a 
-                    href="https://linkedin.com/in/vaibhavpetkar" 
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground rounded-md hover:opacity-90"
-                  >
-                    <Linkedin size={18} /> LinkedIn
-                  </a>
-                  <a 
-                    href="https://github.com/vaibhavpetkar" 
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-secondary text-secondary-foreground rounded-md hover:opacity-90"
-                  >
-                    <Github size={18} /> GitHub
-                  </a>
-                  <a 
-                    href="mailto:your-email@example.com" 
-                    className="inline-flex items-center gap-2 px-4 py-2 bg-accent text-accent-foreground rounded-md hover:opacity-90"
-                  >
-                    <Mail size={18} /> Email
-                  </a>
+                {/* Bio */}
+                <div className="md:col-span-2">
+                  <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-xs font-semibold mb-4">
+                    <span className="relative flex h-2 w-2">
+                      <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-primary opacity-75"></span>
+                      <span className="relative inline-flex rounded-full h-2 w-2 bg-primary"></span>
+                    </span>
+                    Available for new opportunities & Mentorship
+                  </div>
+
+                  <h1 className="text-4xl md:text-5xl font-display font-extrabold mb-2 leading-tight">
+                    Vaibhav <span className="text-gradient">Petkar</span>
+                  </h1>
+                  <p className="text-lg text-muted-foreground mb-4 font-medium">
+                    Tech CEO · Full-Stack Developer · Frappe & ERPNext Specialist · Programming Instructor
+                  </p>
+
+                  <div className="flex flex-col gap-2 mb-6 text-sm text-muted-foreground">
+                    <span>📍 Kolhapur, Maharashtra, India</span>
+                    <span>🏢 V10x Technologies Pvt Ltd — Software Developer</span>
+                    <span>🎓 MCA — YCMOU | B.Sc — Shivaji University</span>
+                    <span>📞 +91 9922565938</span>
+                    <span>📧 vaibhavprakashpetkar@gmail.com</span>
+                  </div>
+
+                  {/* Social Links */}
+                  <div className="flex flex-wrap gap-3">
+                    <Button size="sm" className="rounded-full gap-2 shadow-md" asChild>
+                      <a href="https://www.linkedin.com/in/vaibhav-petkar-8370b424a" target="_blank" rel="noreferrer">
+                        <Linkedin size={15} /> LinkedIn
+                      </a>
+                    </Button>
+                    <Button size="sm" variant="outline" className="rounded-full gap-2" asChild>
+                      <a href="https://github.com/VaibhavPetkar" target="_blank" rel="noreferrer">
+                        <Github size={15} /> GitHub
+                      </a>
+                    </Button>
+                    <Button size="sm" variant="outline" className="rounded-full gap-2" asChild>
+                      <a href="mailto:vaibhavprakashpetkar@gmail.com">
+                        <Mail size={15} /> Email
+                      </a>
+                    </Button>
+                    <Button size="sm" variant="outline" className="rounded-full gap-2 hover:bg-[#25D366]/10 hover:text-[#25D366] hover:border-[#25D366]/30" asChild>
+                      <a href="https://wa.me/919922565938" target="_blank" rel="noreferrer">
+                        <MessageCircle size={15} /> WhatsApp
+                      </a>
+                    </Button>
+                    <Button size="sm" variant="outline" className="rounded-full gap-2" asChild>
+                      <a href="https://vaibhavpetkar.online" target="_blank" rel="noreferrer">
+                        <Globe size={15} /> Website
+                      </a>
+                    </Button>
+                  </div>
                 </div>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Skills Section */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-8">Technical Skills</h2>
-            <div className="grid md:grid-cols-2 gap-6">
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Code2 size={24} /> Backend Development
-                  </CardTitle>
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="mb-16"
+          >
+            <h2 className="text-3xl font-display font-bold mb-8 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Code2 className="w-4 h-4 text-primary" />
+              </div>
+              Technical Skills
+            </h2>
+            <div className="grid md:grid-cols-2 gap-5">
+              {[
+                {
+                  title: "Backend Development",
+                  icon: <Code2 size={20} />,
+                  skills: ["Python", "Frappe", "ERPNext", "Node.js", "SQL", "API Design", "PHP"]
+                },
+                {
+                  title: "Frontend Development",
+                  icon: <Globe size={20} />,
+                  skills: ["React", "TypeScript", "Tailwind CSS", "JavaScript", "HTML/CSS", "Bootstrap", "Next.js"]
+                },
+                {
+                  title: "Mobile & Tools",
+                  icon: <Phone size={20} />,
+                  skills: ["Flutter", "Android (Java)", "Git", "Docker", "CI/CD", "REST APIs", "WebSockets"]
+                },
+                {
+                  title: "Specializations",
+                  icon: <Award size={20} />,
+                  skills: ["ERP Systems", "Custom Modules", "Biometric Integration", "AI Calling", "Linux Admin", "Cybersecurity"]
+                }
+              ].map((cat, i) => (
+                <motion.div
+                  key={cat.title}
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Card className="h-full border-border/50 hover:border-primary/50 transition-colors bg-card/80">
+                    <CardHeader className="pb-3">
+                      <CardTitle className="flex items-center gap-2 text-base font-bold">
+                        <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                          {cat.icon}
+                        </div>
+                        {cat.title}
+                      </CardTitle>
+                    </CardHeader>
+                    <CardContent>
+                      <div className="flex flex-wrap gap-2">
+                        {cat.skills.map(skill => (
+                          <Badge key={skill} variant="secondary" className="text-xs">{skill}</Badge>
+                        ))}
+                      </div>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Experience Section */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+            className="mb-16"
+          >
+            <h2 className="text-3xl font-display font-bold mb-8 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Building2 className="w-4 h-4 text-primary" />
+              </div>
+              Experience
+            </h2>
+
+            <div className="space-y-5">
+              {[
+                {
+                  role: "Software Developer",
+                  company: "V10x Technologies Pvt Ltd",
+                  location: "Pune",
+                  date: "2025 – Present",
+                  badge: "Current",
+                  desc: "Developed a multi-tenant Face Checking System and custom AI Calling System using Frappe. Integrated biometric machines and social media APIs. Managed system administration and server maintenance."
+                },
+                {
+                  role: "Junior IT Executive",
+                  company: "Laxmi Civil Engineering Service Pvt. Ltd.",
+                  location: "Kolhapur",
+                  date: "2023 – 2025",
+                  badge: null,
+                  desc: "Managed company servers and provided live production backend support. Developed in-house websites for PMC & EMD government tenders. Handled government IoT projects and set up internal self-hosted services."
+                },
+                {
+                  role: "Programming Instructor",
+                  company: "Disha Computer Institute",
+                  location: "Kolhapur",
+                  date: "Sep 2022 – Present",
+                  badge: "Ongoing",
+                  desc: "Teaching programming languages and computer fundamentals. Guiding students in practical programming, system architecture, and project implementations."
+                }
+              ].map((exp, i) => (
+                <motion.div
+                  key={i}
+                  initial={{ opacity: 0, x: -20 }}
+                  whileInView={{ opacity: 1, x: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: i * 0.1 }}
+                >
+                  <Card className="border-border/50 hover:border-primary/50 transition-colors bg-card/80">
+                    <CardContent className="p-6">
+                      <div className="flex flex-col sm:flex-row sm:items-center justify-between mb-2 gap-2">
+                        <div>
+                          <h3 className="font-bold text-lg">{exp.role}</h3>
+                          <p className="text-primary text-sm font-medium">{exp.company} · {exp.location}</p>
+                        </div>
+                        <div className="flex items-center gap-2 shrink-0">
+                          <span className="text-xs text-muted-foreground bg-secondary px-2.5 py-1 rounded-full">{exp.date}</span>
+                          {exp.badge && <Badge className="text-xs">{exp.badge}</Badge>}
+                        </div>
+                      </div>
+                      <p className="text-sm text-muted-foreground leading-relaxed">{exp.desc}</p>
+                    </CardContent>
+                  </Card>
+                </motion.div>
+              ))}
+            </div>
+          </motion.section>
+
+          {/* Education & Certs Section */}
+          <motion.section
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true }}
+            variants={fadeIn}
+          >
+            <h2 className="text-3xl font-display font-bold mb-8 flex items-center gap-3">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <GraduationCap className="w-4 h-4 text-primary" />
+              </div>
+              Education & Certifications
+            </h2>
+
+            <div className="grid md:grid-cols-2 gap-5">
+              <Card className="border-border/50 bg-card/80">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">Academic Degrees</CardTitle>
                 </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {["Python", "Frappe", "ERPNext", "SQL", "API Design"].map(skill => (
-                      <Badge key={skill} variant="secondary">{skill}</Badge>
-                    ))}
-                  </div>
+                <CardContent className="space-y-3">
+                  {[
+                    { degree: "M.C.A", inst: "YCMOU", year: "2025" },
+                    { degree: "PGDCA", inst: "E-Max", year: "2022" },
+                    { degree: "B.Sc", inst: "Shivaji University", year: "2021" },
+                  ].map(edu => (
+                    <div key={edu.degree} className="flex items-center justify-between py-2 border-b border-border/40 last:border-0">
+                      <div>
+                        <p className="font-bold text-sm">{edu.degree}</p>
+                        <p className="text-xs text-muted-foreground">{edu.inst}</p>
+                      </div>
+                      <Badge variant="outline" className="text-xs">{edu.year}</Badge>
+                    </div>
+                  ))}
                 </CardContent>
               </Card>
 
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    Frontend Development
-                  </CardTitle>
+              <Card className="border-border/50 bg-card/80">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-base">Certifications</CardTitle>
                 </CardHeader>
                 <CardContent>
                   <div className="flex flex-wrap gap-2">
-                    {["React", "TypeScript", "Tailwind CSS", "JavaScript", "HTML/CSS"].map(skill => (
-                      <Badge key={skill} variant="secondary">{skill}</Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Globe size={24} /> Web Technologies
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {["REST APIs", "Web Sockets", "Docker", "Git", "CI/CD"].map(skill => (
-                      <Badge key={skill} variant="secondary">{skill}</Badge>
-                    ))}
-                  </div>
-                </CardContent>
-              </Card>
-
-              <Card>
-                <CardHeader>
-                  <CardTitle className="flex items-center gap-2">
-                    <Award size={24} /> Specializations
-                  </CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <div className="flex flex-wrap gap-2">
-                    {["ERP Systems", "Custom Modules", "Business Logic", "Database Design", "Performance Optimization"].map(skill => (
-                      <Badge key={skill} variant="secondary">{skill}</Badge>
+                    {[
+                      "Certified Cyber Warrior – HackingFlix",
+                      "Complete Cyber Security – STATIONX",
+                      "NCC – National Level (Nagpur)",
+                      "National Level Athlete",
+                      "Full Stack Development",
+                      "ERPNext Expertise",
+                    ].map(cert => (
+                      <Badge key={cert} variant="secondary" className="text-xs">{cert}</Badge>
                     ))}
                   </div>
                 </CardContent>
               </Card>
             </div>
-          </section>
+          </motion.section>
 
-          {/* About Content */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-8">About Me</h2>
-            
-            <Card>
-              <CardContent className="pt-6 space-y-4">
-                <p>
-                  I'm a passionate software developer with deep expertise in Frappe Framework and ERPNext. 
-                  With experience at V10x Technologies, I've built scalable ERP solutions and custom business applications.
-                </p>
-                <p>
-                  Beyond development, I'm a programming instructor sharing knowledge with aspiring developers, 
-                  helping them master full-stack development and enterprise application architecture.
-                </p>
-                <p>
-                  My focus areas include:
-                </p>
-                <ul className="list-disc list-inside space-y-2 ml-4">
-                  <li>Building robust ERPNext customizations and modules</li>
-                  <li>Full-stack web application development</li>
-                  <li>Teaching programming best practices</li>
-                  <li>Enterprise software architecture</li>
-                  <li>Performance optimization and scalability</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Experience Section */}
-          <section className="max-w-4xl mx-auto mb-16">
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-2">
-              <Building2 size={32} /> Experience
-            </h2>
-            
-            <Card className="mb-6">
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <div>
-                    <CardTitle>Software Developer</CardTitle>
-                    <p className="text-muted-foreground">V10x Technologies Pvt Ltd</p>
-                  </div>
-                  <Badge>Current</Badge>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted-foreground mb-3">Developing custom ERPNext modules and integrations</p>
-                <ul className="list-disc list-inside space-y-1 text-sm text-muted-foreground">
-                  <li>Built and maintained 10+ ERPNext custom apps</li>
-                  <li>Optimized database queries for 40% performance improvement</li>
-                  <li>Mentored junior developers on best practices</li>
-                </ul>
-              </CardContent>
-            </Card>
-          </section>
-
-          {/* Education Section */}
-          <section className="max-w-4xl mx-auto">
-            <h2 className="text-3xl font-bold mb-8 flex items-center gap-2">
-              <GraduationCap size={32} /> Education & Certifications
-            </h2>
-            
-            <Card>
-              <CardContent className="pt-6 space-y-3">
-                <p><strong>Continuous Learning:</strong> Always staying updated with latest technologies and frameworks</p>
-                <div className="flex flex-wrap gap-2">
-                  <Badge variant="outline">Full Stack Development</Badge>
-                  <Badge variant="outline">Frappe Framework Certified</Badge>
-                  <Badge variant="outline">ERPNext Expertise</Badge>
-                </div>
-              </CardContent>
-            </Card>
-          </section>
         </div>
       </main>
     </>

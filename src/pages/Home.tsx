@@ -34,7 +34,8 @@ import { api } from "@shared/routes";
 import {
   ArrowRight, Github, Linkedin, Mail, ExternalLink,
   Terminal, Database, Layout, ServerCog, MessageCircle,
-  Code, Code2, Smartphone, GraduationCap, Building2
+  Code, Code2, Smartphone, GraduationCap, Building2,
+  Phone, ChevronUp, Star, Users, Briefcase
 } from "lucide-react";
 import type { z } from "zod";
 
@@ -83,9 +84,10 @@ ${values.message}`;
   };
 
   return (
-    <div className="min-h-screen bg-mesh selection:bg-primary/30 selection:text-primary">
+    <div className="min-h-screen bg-mesh">
       <div className="blob blob-1"></div>
       <div className="blob blob-2"></div>
+      <div className="blob blob-3"></div>
       <Navbar />
 
       {/* Hero Section */}
@@ -143,6 +145,52 @@ ${values.message}`;
                 <Button size="lg" variant="outline" className="rounded-full h-14 px-8 text-base border-2 hover:bg-secondary transition-all z-20" asChild>
                   <a href="#courses">View Courses</a>
                 </Button>
+              </motion.div>
+
+              {/* Social Links */}
+              <motion.div variants={fadeIn} className="flex items-center gap-4 mt-6 justify-center lg:justify-start">
+                <span className="text-xs text-muted-foreground uppercase tracking-widest font-semibold">Find me on</span>
+                <div className="flex items-center gap-3">
+                  <a href="https://github.com/VaibhavPetkar" target="_blank" rel="noreferrer"
+                    className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:text-foreground hover:bg-primary/10 hover:text-primary hover:scale-110 transition-all z-20">
+                    <Github className="w-4 h-4" />
+                  </a>
+                  <a href="https://www.linkedin.com/in/vaibhav-petkar-8370b424a" target="_blank" rel="noreferrer"
+                    className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary hover:scale-110 transition-all z-20">
+                    <Linkedin className="w-4 h-4" />
+                  </a>
+                  <a href="mailto:vaibhavprakashpetkar@gmail.com"
+                    className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary hover:scale-110 transition-all z-20">
+                    <Mail className="w-4 h-4" />
+                  </a>
+                  <a href="https://wa.me/919922565938" target="_blank" rel="noreferrer"
+                    className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-[#25D366]/20 hover:text-[#25D366] hover:scale-110 transition-all z-20">
+                    <MessageCircle className="w-4 h-4" />
+                  </a>
+                  <a href="tel:+919922565938"
+                    className="w-9 h-9 rounded-full bg-secondary flex items-center justify-center text-muted-foreground hover:bg-primary/10 hover:text-primary hover:scale-110 transition-all z-20">
+                    <Phone className="w-4 h-4" />
+                  </a>
+                </div>
+              </motion.div>
+
+              {/* Stats */}
+              <motion.div variants={fadeIn} className="flex flex-wrap items-center gap-6 mt-8 justify-center lg:justify-start">
+                {[
+                  { icon: <Briefcase className="w-4 h-4" />, value: "3+", label: "Years Experience" },
+                  { icon: <Star className="w-4 h-4" />, value: "20+", label: "Projects Delivered" },
+                  { icon: <Users className="w-4 h-4" />, value: "100+", label: "Students Mentored" },
+                ].map((stat) => (
+                  <div key={stat.label} className="flex items-center gap-2 z-20">
+                    <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center text-primary">
+                      {stat.icon}
+                    </div>
+                    <div>
+                      <div className="stat-number text-xl font-extrabold font-display leading-none">{stat.value}</div>
+                      <div className="text-xs text-muted-foreground">{stat.label}</div>
+                    </div>
+                  </div>
+                ))}
               </motion.div>
             </div>
           </motion.div>
@@ -683,35 +731,54 @@ ${values.message}`;
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-border bg-background py-12">
-        <div className="max-w-6xl mx-auto px-4 sm:px-6 flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-2">
-            <Code2 className="text-primary" size={24} />
-            <span className="font-display font-bold text-xl">Vaibhav.</span>
+      <footer className="border-t border-border bg-background py-12 relative">
+        {/* Back to top */}
+        <button
+          onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+          className="absolute -top-5 left-1/2 -translate-x-1/2 w-10 h-10 rounded-full bg-primary text-primary-foreground flex items-center justify-center shadow-lg hover:scale-110 hover:shadow-primary/30 hover:shadow-xl transition-all"
+          aria-label="Back to top"
+        >
+          <ChevronUp className="w-5 h-5" />
+        </button>
+
+        <div className="max-w-6xl mx-auto px-4 sm:px-6">
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-2">
+              <div className="w-8 h-8 rounded-lg bg-primary/10 flex items-center justify-center">
+                <Code2 className="text-primary" size={16} />
+              </div>
+              <span className="font-display font-bold text-xl">Vaibhav.</span>
+            </div>
+
+            <div className="flex flex-wrap items-center justify-center gap-5">
+              <a href="https://github.com/VaibhavPetkar" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Github className="w-4 h-4" /> GitHub
+              </a>
+              <a href="https://www.linkedin.com/in/vaibhav-petkar-8370b424a" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Linkedin className="w-4 h-4" /> LinkedIn
+              </a>
+              <a href="mailto:vaibhavprakashpetkar@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Mail className="w-4 h-4" /> Email
+              </a>
+              <a href="tel:+919922565938" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors text-sm">
+                <Phone className="w-4 h-4" /> +91 9922565938
+              </a>
+              <a href="https://wa.me/919922565938" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-[#25D366] transition-colors text-sm">
+                <MessageCircle className="w-4 h-4" /> WhatsApp
+              </a>
+            </div>
+
+            <p className="text-xs text-muted-foreground text-center">
+              © {new Date().getFullYear()} Vaibhav Petkar.<br className="md:hidden" /> All rights reserved.
+            </p>
           </div>
 
-          <div className="flex flex-wrap items-center justify-center gap-6">
-            <a href="https://github.com/VaibhavPetkar" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-              <Github className="w-5 h-5" />
-              <span className="text-sm">Main GitHub</span>
-            </a>
-
-            <a href="https://www.linkedin.com/in/vaibhav-petkar-8370b424a" target="_blank" rel="noreferrer" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-              <Linkedin className="w-5 h-5" />
-              <span className="text-sm">LinkedIn</span>
-            </a>
-            <a href="mailto:vaibhavprakashpetkar@gmail.com" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-              <Mail className="w-5 h-5" />
-              <span className="text-sm">Email</span>
-            </a>
-            <a href="tel:+919922565938" className="flex items-center gap-2 text-muted-foreground hover:text-primary transition-colors">
-              <span className="text-sm font-medium">+91 9922565938</span>
-            </a>
+          <div className="mt-8 pt-6 border-t border-border/50 text-center">
+            <p className="text-xs text-muted-foreground">
+              Built with React + Vite + Tailwind CSS · Hosted on{" "}
+              <a href="https://vaibhavpetkar.online" className="text-primary hover:underline">vaibhavpetkar.online</a>
+            </p>
           </div>
-
-          <p className="text-sm text-muted-foreground">
-            © {new Date().getFullYear()} Vaibhav Petkar. All rights reserved.
-          </p>
         </div>
       </footer>
     </div>
